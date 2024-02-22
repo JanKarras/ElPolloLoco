@@ -11,17 +11,9 @@ class Chicken extends MovableObject{
     constructor (){
         super().loadImg(this.images[this.currentImageIndex]);
         this.x = 720 + Math.random() * 500;
+        this.speed = 2 + Math.random() * 0.25;
         setInterval(this.moveleft.bind(this), 1000 / 60);
         setInterval(this.changeMoveImg.bind(this), 100);
-    }
-
-    moveleft = () =>{
-        if (this.x > -100)
-        {
-            this.x = this.x - 2;
-        }
-        else
-            this.x = 720 + Math.random() * 500;
     }
 
     changeMoveImg = () =>{

@@ -4,8 +4,12 @@ class MovableObject{
     img;
     height = 150;
     width = 100;
+    speed = 2;
+    xNeg = -100;
+    xPos = 720 + Math.random() * 500;
     currentImageIndex = 0;
     images = [];
+    otherDirection = false;
 
     loadImg(path){
         this.img = new Image();
@@ -18,6 +22,13 @@ class MovableObject{
             img.src = path;
             this.images[path] = img;
         });
+    }
+
+    moveleft = () =>{
+        if (this.x > this.xNeg)
+            this.x = this.x - this.speed ;
+        else
+            this.x = this.xPos;
     }
 
     moveRight(){
