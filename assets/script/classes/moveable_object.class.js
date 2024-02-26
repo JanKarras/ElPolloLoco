@@ -7,9 +7,25 @@ class MovableObject{
     speed = 2;
     xNeg = -100;
     xPos = 720 + Math.random() * 500;
-    currentImageIndex = 0;
-    images = [];
+    IMAGES_WALKING = [];
     otherDirection = false;
+    speedY = 0;
+    acceleration = 2.5;
+
+
+    isAboveGround(){
+        return this.y < 140;
+    }
+
+    applyGravity(){
+        setInterval(() => {
+            if (this.y < 140)
+            {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25)
+    }
 
     loadImg(path){
         this.img = new Image();
@@ -20,7 +36,7 @@ class MovableObject{
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;
-            this.images[path] = img;
+            this.IMAGES_WALKING[path] = img;
         });
     }
 
@@ -33,5 +49,14 @@ class MovableObject{
 
     moveRight(){
 
+    }
+
+    animate(IMAGES, currentImageIndex, interval){
+        setInterval(() => {
+            this.loadImg(IMAGES[currentImageIndex])
+            currentImageIndex++;
+            if (currentImageIndex == IMAGES.length)
+                currentImageIndex = 0;
+        }, interval);
     }
 }
