@@ -22,6 +22,23 @@ class Character extends MoveableObject {
         "assets/img/2_character_pepe/3_jump/J-38.png",
         "assets/img/2_character_pepe/3_jump/J-39.png",
     ]
+
+    IMAGES_DEAD = [
+        'assets/img/2_character_pepe/5_dead/D-51.png',
+        'assets/img/2_character_pepe/5_dead/D-52.png',
+        'assets/img/2_character_pepe/5_dead/D-53.png',
+        'assets/img/2_character_pepe/5_dead/D-54.png',
+        'assets/img/2_character_pepe/5_dead/D-55.png',
+        'assets/img/2_character_pepe/5_dead/D-56.png',
+        'assets/img/2_character_pepe/5_dead/D-57.png',
+    ]
+
+    IMAGES_HURT = [
+        'assets/img/2_character_pepe/4_hurt/H-41.png',
+        'assets/img/2_character_pepe/4_hurt/H-42.png',
+        'assets/img/2_character_pepe/4_hurt/H-43.png',
+    ]
+
     world;
     //walking_sound = new Audio('audioPATH')
 
@@ -29,6 +46,8 @@ class Character extends MoveableObject {
         super().loadImage("assets/img/2_character_pepe/2_walk/W-21.png")
         this.loadImages(this.IMAGES_WALKING)
         this.loadImages(this.IMAGES_JUMP)
+        this.loadImages(this.IMAGES_DEAD)
+        this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
         this.animate();
         
@@ -40,10 +59,12 @@ class Character extends MoveableObject {
             //this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x * 3 - 600){
                 this.moveRight();
+                this.otherDirection = false;
                 //this.walking_sound.play();
             }
             if (this.world.keyboard.LEFT && this.x > 0){
                 this.moveLeft();
+                this.otherDirection = true;
                 //this.walking_sound.play();
             }
 
@@ -54,7 +75,12 @@ class Character extends MoveableObject {
         }, 1000 / 60);
 
         setInterval(() =>{
-            if (this.isAboveGround()){
+            if (this.isDead()){
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.isHurt()){
+                this.playAnimation(this.IMAGES_HURT);
+            }
+            else if (this.isAboveGround()){
                 this.playAnimation(this.IMAGES_JUMP);
             } else {
                 if (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT){
