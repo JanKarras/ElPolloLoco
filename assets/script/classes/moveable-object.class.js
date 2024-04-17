@@ -16,17 +16,10 @@ class MoveableObject extends DrawableObject {
    }
 
    isAboveGround() {
+      if (this instanceof ThrowableObject){
+         return true;
+      } else
       return (this.y < 140);
-   }
-
-   drawFrame(ctx) {
-      if (this instanceof Character || this instanceof Chicken) {
-         ctx.beginPath();
-         ctx.lineWidth = '5';
-         ctx.strokeStyle = 'blue';
-         ctx.rect(this.x, this.y, this.width, this.height);
-         ctx.stroke();
-      }
    }
 
    moveRight() {
@@ -42,6 +35,7 @@ class MoveableObject extends DrawableObject {
       let path = images[i];
       this.img = this.images[path];
       this.currentImage++;
+      return this.currentImage;
    }
 
    jump() {
@@ -49,7 +43,25 @@ class MoveableObject extends DrawableObject {
    }
 
    isColliding(mo) {
-      return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x && this.y < mo.y + mo.height;
+      if (this instanceof Character){
+         if (mo instanceof Coin)
+            return this.x + 15 + this.width -30 > mo.x + 40 && this.y + 110 + this.height - 120 > mo.y +40 && this.x + 15 < mo.x + 40 && this.y + 110 < mo.y + 40 + mo.height -80;
+         if (mo instanceof Bottle)
+            return this.x + 15 + this.width -30 > mo.x + 30 && this.y + 110 + this.height - 120 > mo.y +10 && this.x + 15 < mo.x + 30 && this.y + 110 < mo.y + 10 + mo.height -10;
+         if (mo instanceof Chicken)
+            return this.x + 15 + this.width -30 > mo.x && this.y + 110 + this.height - 50 > mo.y +60 && this.x + 15 < mo.x && this.y + 110 < mo.y + 60 + mo.height -120;
+         if (mo instanceof Endboss)
+            return this.x + 15 + this.width -30 > mo.x && this.y + 110 + this.height - 50 > mo.y +60 && this.x + 15 < mo.x && this.y + 110 < mo.y + 60 + mo.height -120;
+         if (mo instanceof SmallChicken)
+            return this.x + 15 + this.width -30 > mo.x && this.y + 110 + this.height - 50 > mo.y +60 && this.x + 15 < mo.x && this.y + 110 < mo.y + 60 + mo.height -120;
+      } else {
+         if (mo instanceof Chicken)
+            return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x - 50 < mo.x && this.y < mo.y + mo.height;
+         if (mo instanceof Endboss)
+            return this.x + this.width > mo.x + 20 && this.y + this.height > mo.y && this.x < mo.x && this.y  < mo.y +  mo.height;
+         if (mo instanceof SmallChicken)
+            return this.x + this.width > mo.x && this.y + this.height > mo.y && this.x < mo.x && this.y  < mo.y +  mo.height;
+      }
    }
 
    hit() {

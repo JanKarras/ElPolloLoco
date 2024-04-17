@@ -7,20 +7,31 @@
     <title>Document</title>
     <script src="./assets/script/classes/DrawableObject.class.js"></script>
     <script src="./assets/script/classes/moveable-object.class.js"></script>
+    <script src="./assets/script/classes/status_bar.class.js"></script>
     <script src="./assets/script/classes/world.class.js"></script>
     <script src="./assets/script/classes/keyboard.class.js"></script>
     <script src="./assets/script/classes/char.class.js"></script>
     <script src="./assets/script/classes/chicken.class.js"></script>
+    <script src="./assets/script/classes/small-chicken.class.js"></script>
+    <script src="./assets/script/classes/coin.class.js"></script>
+    <script src="./assets/script/classes/bottle.class.js"></script>
     <script src="./assets/script/classes/endboss.class.js"></script>
     <script src="./assets/script/classes/cloud.class.js"></script>
     <script src="./assets/script/classes/background-object.class.js"></script>
+    <script src="./assets/script/classes/thorwabke-object.class.js"></script>
     <script src="./assets/script/classes/level.class.js"></script>
-    <script src="./assets/script/classes/status_bar.class.js"></script>
     <script src="./assets/script/levels/level1.js"></script>
     <script src="./assets/script/game.js"></script>
 </head>
 <body onload="init()">
-    <h1>Elk pollo loco</h1>
+    <h1>El Pollo Loco</h1>
     <canvas id="canvas" width="720px" height="480px"></canvas>
+    <button id="button" onclick="startGame()">Start Game</button>
+    <div id="instructions" class="displayNone instructions">
+        <div>Left: A</div>
+        <div>Right: D</div>
+        <div>Jump: Space</div>
+        <div>Throw: E</div>
+    </div>
 </body>
 </html>
