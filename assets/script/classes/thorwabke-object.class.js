@@ -15,6 +15,8 @@ class ThrowableObject extends MoveableObject{
         'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
         'assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ]
+    
+    intervalId
 
     constructor(x, y){
         super();
@@ -31,11 +33,15 @@ class ThrowableObject extends MoveableObject{
     throw(){
         this.speedY = 30;
         this.applyGravity();
-        setInterval(() => {
+        this.intervalId = setInterval(() => {
             this.x += 10;
         }, 25)
         setInterval(() => {
             this.playAnimation(this.IMAGES)
         }, 60)
+    }
+
+    stopThrow(){
+        clearInterval(this.intervalId);
     }
 }

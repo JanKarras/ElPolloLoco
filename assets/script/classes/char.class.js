@@ -53,6 +53,7 @@ class Character extends MoveableObject {
     ]
 
     world;
+    canThrow = false;
     isMoveing = false;
     isSleeping = false;
     coins = 0
@@ -75,7 +76,7 @@ class Character extends MoveableObject {
 
         setInterval(() =>{
             //this.walking_sound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x * 3 - 600){
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x * 3 - 600 && this.checkCanMoveRight()){
                 this.moveRight();
                 this.otherDirection = false;
                 //this.walking_sound.play();
@@ -110,9 +111,16 @@ class Character extends MoveableObject {
             } else if (this.isMoveing == false && !this.isAboveGround()){
                 this.playAnimation(this.IMAGES_STAND)
             }
-
         }, 60);
     }
 
-    
+    checkCanMoveRight(){
+        for (let i = 0; i < this.world.level.enemies.length; i++) {
+            const enemy = this.world.level.enemies[i];
+            if (enemy instanceof Endboss){
+                if(this.x < enemy.x - 40)
+                    return (true);
+            }
+        }
+     }
 }

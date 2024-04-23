@@ -1,11 +1,14 @@
 let canvas;
 let keyboard = new Keyboard();
 
-function endScreen(){
+function endScreen(end){
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     let img = new Image()
-    img.src = "assets/img/9_intro_outro_screens/game_over/oh no you lost!.png"
+    if (end == 'lose')
+        img.src = "assets/img/9_intro_outro_screens/game_over/oh no you lost!.png"
+    else
+        img.src = 'assets/img/9_intro_outro_screens/game_over/game over.png'
     img.onload = function(){
         ctx.drawImage(img, 0, 0, 720, 480);
     }
@@ -22,8 +25,12 @@ function startGame(){
     setInterval(() => {
         if(world.character.energy <= 0){
             setTimeout(() =>{
-                endScreen();
+                endScreen('lose');
             }, 7 * 60)
+        } else if (world.gameWon == true){
+            setTimeout(() =>{
+                endScreen('win');
+            }, 3 * 200)
         }
     }, 60)
     console.log(world.character);

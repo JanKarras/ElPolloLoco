@@ -8,7 +8,7 @@ function initLevel() {
             //new Chicken(0),
             //new Chicken(1),
             //new Chicken(2),
-            new SmallChicken(0),
+            //new SmallChicken(0),
             new Endboss(3),
         ],
         [
