@@ -2,8 +2,7 @@ class Endboss extends MoveableObject {
     height = 400;
     width = 250;
     y = 50;
-    //x = 719 * 2 + 400
-    x = 500
+    x = 719 * 2 + 400
     speed = 0.5
     isDead = false
     IMAGES_ALERT = [

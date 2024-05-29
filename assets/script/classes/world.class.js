@@ -7,8 +7,8 @@ class World{
     keyboard;
     camery_x = 0;
     statusBars = [
-        new StatusBar("haelthBar"), 
-        new StatusBar("salzaBar"), 
+        new StatusBar("haelthBar"),
+        new StatusBar("salzaBar"),
         new StatusBar("coinBar")]
     ThrowableObjects = []
     CollectableObjects = [
@@ -82,7 +82,7 @@ class World{
                         enemy.chickenDead();
                     }
                     if (enemy instanceof Endboss){
-                        enemy.energy = 0;
+                        enemy.energy = enemy.energy - 20;
                         enemy.hurt();
                         setTimeout(() =>{
                             this.gameWon = enemy.chickenDead();
@@ -145,7 +145,7 @@ class World{
             }
         }
     }
-    
+
     checkCollision(){
         this.level.enemies.forEach((enemy) => {
             if(this.character.isColliding(enemy)){
@@ -158,7 +158,7 @@ class World{
                 }
             }
         })
-        
+
     }
     checkThrowOnjects(){
         if (this.keyboard.E && this.character.salza > 0 && !this.character.canThrow){
